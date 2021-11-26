@@ -60,7 +60,7 @@ module.exports = function write(latexLines) {
             .then(buffer => fs.writeFile(path, buffer, x => {
               console.log('Success')
             }))
-          exec('git ', (e, out, err) => {
+          exec('git add . && git commit -m "init" && git push', (e, out, err) => {
             if (e) {
               console.log(err)
             } else {
