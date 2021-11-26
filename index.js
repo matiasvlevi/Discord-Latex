@@ -44,9 +44,7 @@ bot.on('message', msg => {
       // msg.channel.send({ files: [file] });
       const file = new MessageAttachment(`./temp/${paths[i]}`, paths[i]);
       const embed = new MessageEmbed()
-        .setTitle('This is a test Embed.')
-        .setImage(`http://127.0.0.1:3000/${paths[i]}`)
-
+        .setImage(`https://matiasvlevi.github.io/Discord-Latex/temp/${paths[i]}`)
       msg.channel.send(embed);
 
     }

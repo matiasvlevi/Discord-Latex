@@ -1,6 +1,6 @@
 const texsvg = require('texsvg');
 const fs = require('fs');
-
+const { exec } = require('child_process');
 const { svg2png } = require('svg-png-converter')
 module.exports = function write(latexLines) {
   let paths = [];
@@ -55,11 +55,18 @@ module.exports = function write(latexLines) {
               input: svgFile,
               encoding: 'buffer',
               format: 'png',
-              multiplier: 0.4
+              multiplier: 1.5
             })
             .then(buffer => fs.writeFile(path, buffer, x => {
               console.log('Success')
             }))
+          exec('git ', (e, out, err) => {
+            if (e) {
+              console.log(err)
+            } else {
+              console.log(out)
+            }
+          });
         }
       );
     paths.push(name);
