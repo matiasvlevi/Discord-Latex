@@ -38,10 +38,10 @@ $help
 
 ## Preview
 
-bot:
+bot:<br/>
 ![demo](./assets/demo.png)
 
 
-logs:
+logs:<br/>
 ![logsdemo](./assets/logs.png)
 These logs are saved automatically in `./logs`.
