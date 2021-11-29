@@ -9,6 +9,6 @@ module.exports = function latexParser(msg) {
   lines.splice(0, 1);
   lines.splice(lines.length - 1, 1);
 
-  Logger.command(msg.author.username, `\x1b[36m Latex  -->  ${lines.join(', ')}\x1b[0m `);
+  Logger.command(msg.author.username, `\x1b[36mLatex  -->  ${lines.join(', ')}\x1b[0m `);
   return lines;
 }

@@ -15,7 +15,7 @@ class Commands {
     this.commands = [];
     this.prefix = prefix;
     this.darkTheme = false;
-    this.size = 1;
+    this.size = 0.8;
   }
   add(name, func, helpmsg = '', example = '') {
     this.commands.push(new Command(name, func, helpmsg, example));
