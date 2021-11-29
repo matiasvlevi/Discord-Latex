@@ -7,6 +7,10 @@ const texsvg = require('texsvg');
 
 module.exports = function convert(msg, name, tex, ref) {
   let path = `./temp/${name}`;
+  // Create temp directory
+  if (!fs.existsSync('./temp')) {
+    fs.mkdirSync('./temp');
+  }
   texsvg(tex)
     .then((svg) => {
       let svgFile = parseSVG(svg, ref);
