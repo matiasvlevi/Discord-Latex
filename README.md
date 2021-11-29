@@ -41,11 +41,11 @@ $help
 bot:
 
 <!-- ![demo](./assets/demo.png) -->
-<img src="./assets/demo.png" width="100px">
+<img src="./assets/demo.png" width="350px">
 
 
 logs:
 
-<img src="./assets/logs.png" width="100px">
+<img src="./assets/logs.png" width="350px">
 
 These logs are saved automatically in `./logs`.
