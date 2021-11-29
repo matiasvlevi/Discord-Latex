@@ -10,7 +10,7 @@ A Discord bot made to render Latex equations
 npm run setup
 ```
 
-This shortcut just installed all dependencies & created a `.env` file.
+This shortcut installed all dependencies & created a `.env` file.
 Make sur to add your token in this file like so:
 ```
 TOKEN=your_token_here
