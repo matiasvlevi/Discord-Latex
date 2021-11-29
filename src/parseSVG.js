@@ -1,3 +1,16 @@
+function scaleSVG(svgFile, regex, n) {
+  let matches = [...svgFile.matchAll(regex)];
+  for (let i = 0; i < matches.length; i++) {
+    let match = matches2[i][0];
+    let values = [...match.match(/".*?"/gm)][0];
+    let vs = values.split('"')[1].split('ex')[0];
+    let v = parseFloat(vs, 10);
+
+    svgFile = svgFile.replace(`${vs}ex`, `${v*n}ex`);
+  }
+}
+
+
 module.exports = function parseSVG(svg, ref) {
   let svgFile = svg;
 
@@ -12,28 +25,8 @@ module.exports = function parseSVG(svg, ref) {
     svgFile = svgFile.replace('currentColor', col);
   }
 
-  let matches = [...svgFile.matchAll(/width=".*?ex"/gm)];
+  svgFile = scaleSVG(svgFile, /width=".*?ex"/gm, 2);
+  svgFile = scaleSVG(svgFile, /height=".*?ex"/gm, 2);
 
-
-  for (let i = 0; i < matches.length; i++) {
-    let match = matches[i][0];
-    let values = [...match.match(/".*?"/gm)][0];
-    let vs = values.split('"')[1].split('ex')[0];
-    let v = parseFloat(vs, 10);
-
-    svgFile = svgFile.replace(`${vs}ex`, `${v*2}ex`);
-  }
-
-  let matches2 = [...svgFile.matchAll(/height=".*?ex"/gm)];
-
-
-  for (let i = 0; i < matches.length; i++) {
-    let match = matches2[i][0];
-    let values = [...match.match(/".*?"/gm)][0];
-    let vs = values.split('"')[1].split('ex')[0];
-    let v = parseFloat(vs, 10);
-
-    svgFile = svgFile.replace(`${vs}ex`, `${v*2}ex`);
-  }
   return svgFile;
 }
