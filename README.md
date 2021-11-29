@@ -32,3 +32,16 @@ Open the help menu
 # in discord channel
 $help
 ```
+
+
+<br/>
+
+## Preview
+
+bot:
+![demo](./assets/demo.png)
+
+
+logs:
+![logsdemo](./assets/logs.png)
+These logs are saved automatically in `./logs`.
