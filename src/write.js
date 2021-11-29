@@ -1,82 +1,15 @@
-const texsvg = require('texsvg');
-const fs = require('fs');
-const parseSVG = require('./parseSVG');
-const { svg2png } = require('svg-png-converter');
-const {
-  MessageEmbed,
-  MessageAttachment
-} = require('discord.js');
+const convert = require('./convert');
 
-
-
-function callback(msg, name) {
-
-  const attachment = new MessageAttachment(`./temp/${name}`, name);
-  const embed = new MessageEmbed()
-    .attachFiles(attachment)
-    .setImage(`attachment://${name}`)
-  msg.channel.send(embed);
-
-}
-
-module.exports = function write(latexLines, msg) {
-  let paths = [];
+module.exports = function write(latexLines, msg, ref) {
   if (latexLines.length > 3) {
+    // Process entire latex as document (4+ lines).
     let name = `latexDoc.png`;
-    let path = `./temp/${name}`;
-    texsvg(latexLines.join('\n'))
-      .then(
-        (svg) => {
-          let svgFile = parseSVG(svg);
-
-          // fs.writeFileSync(`./temp/${name.split('.')[0] + '.svg'}`, svgFile);
-          // console.log(svgFile);
-
-          svg2png({
-              input: svgFile,
-              encoding: 'buffer',
-              format: 'png',
-              multiplier: 1.2,
-              quality: 1
-            })
-            .then(buffer => fs.writeFile(path, buffer, x => {
-              callback(msg, name);
-              console.log('Success');
-            }))
-        }
-      )
+    convert(msg, name, latexLines.join('\n \\\\ \n'), ref);
   } else {
+    // Process each Latex line individually.
     for (let i = 0; i < latexLines.length; i++) {
       let name = `latexLine${i}.png`;
-      let path = `./temp/${name}`;
-
-      texsvg(latexLines[i])
-        .then(
-          (svg) => {
-
-
-            let svgFile = parseSVG(svg);
-
-            // fs.writeFileSync(`./temp/${name.split('.')[0] + '.svg'}`, svgFile);
-            // console.log(svgFile);
-
-            svg2png({
-                input: svgFile,
-                encoding: 'buffer',
-                format: 'png',
-                multiplier: 1.2,
-                quality: 1
-              })
-              .then(buffer => fs.writeFile(path, buffer, x => {
-                callback(msg, name);
-                console.log('Success');
-              }))
-
-          }
-        );
-      paths.push(name);
+      convert(msg, name, latexLines[i], ref);
     }
   }
-
-  return paths;
 }

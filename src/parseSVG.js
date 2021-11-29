@@ -1,10 +1,15 @@
-module.exports = function parseSVG(svg) {
+module.exports = function parseSVG(svg, ref) {
   let svgFile = svg;
 
   svgFile = svgFile.replace('<svg ', '<svg fill="#fff" transform="scale(1) translate(0, 0)" ');
-
+  let col = '#fff';
+  if (ref.darkTheme === 'true') {
+    col = '#000';
+  } else {
+    col = '#fff';
+  }
   while (svgFile.includes('currentColor')) {
-    svgFile = svgFile.replace('currentColor', '#fff')
+    svgFile = svgFile.replace('currentColor', col);
   }
 
   let matches = [...svgFile.matchAll(/width=".*?ex"/gm)];
