@@ -1,7 +1,7 @@
 function scaleSVG(svgFile, regex, n) {
   let matches = [...svgFile.matchAll(regex)];
   for (let i = 0; i < matches.length; i++) {
-    let match = matches2[i][0];
+    let match = matches[i][0];
     let values = [...match.match(/".*?"/gm)][0];
     let vs = values.split('"')[1].split('ex')[0];
     let v = parseFloat(vs, 10);
