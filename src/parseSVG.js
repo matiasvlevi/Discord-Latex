@@ -8,13 +8,14 @@ function scaleSVG(svgFile, regex, n) {
 
     svgFile = svgFile.replace(`${vs}ex`, `${v*n}ex`);
   }
+  return svgFile;
 }
 
 
 module.exports = function parseSVG(svg, ref) {
   let svgFile = svg;
-
   svgFile = svgFile.replace('<svg ', '<svg fill="#fff" transform="scale(1) translate(0, 0)" ');
+
   let col = '#fff';
   if (ref.darkTheme === 'true') {
     col = '#000';
